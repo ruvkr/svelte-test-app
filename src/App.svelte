@@ -1,5 +1,5 @@
 <script lang="ts">
+  import Home from './pages/home/index.svelte';
 </script>
 
-<style type="scss">
-</style>
+<Home />
