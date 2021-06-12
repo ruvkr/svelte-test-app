@@ -44,6 +44,7 @@
     overflow-x: hidden;
     overflow-y: auto;
     padding: $gap;
+    backface-visibility: hidden;
   }
 
   .container {
