@@ -7,18 +7,52 @@
   export let photo_url: string;
 </script>
 
-<div>
+<div class="container" title="Photo by {user_name}" on:click>
   <img src={thumb} alt="Photo by {user_name}" />
+  <div class="info">
+    <div class="credit">Photo by</div>
+    <div class="user-name">{user_name}</div>
+  </div>
 </div>
 
 <style lang="scss">
-  div {
+  .container {
     width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    &:hover img {
+      filter: brightness(80%);
+      transform: scale(1.1);
+    }
   }
+
   img {
     display: block;
     width: 100%;
     height: auto;
     margin: 0;
+    transition: all 300ms ease-in-out;
+  }
+
+  .info {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    padding: 16px 16px 32px 16px;
+    background-image: linear-gradient(0deg, transparent, #00000080);
+    display: grid;
+    gap: 8px;
+  }
+
+  .credit {
+    color: #dbdbdb;
+  }
+
+  .user-name {
+    color: #ffffff;
+    font-size: 1.6rem;
   }
 </style>
