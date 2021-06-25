@@ -1,14 +1,10 @@
 <script lang="ts">
-  export let _id: string;
   export let thumb: string;
-  export let path: string;
   export let user_name: string;
-  export let user_url: string;
-  export let photo_url: string;
 </script>
 
 <div class="container" title="Photo by {user_name}" on:click>
-  <img src={thumb} alt="Photo by {user_name}" />
+  <img class="image" src={thumb} alt="Photo by {user_name}" />
   <div class="info">
     <div class="credit">Photo by</div>
     <div class="user-name">{user_name}</div>
@@ -22,13 +18,18 @@
     overflow: hidden;
     position: relative;
     cursor: pointer;
-    &:hover img {
-      filter: brightness(80%);
-      transform: scale(1.1);
+    &:hover {
+      .image {
+        filter: brightness(80%);
+        transform: scale(1.1);
+      }
+      .user-name {
+        transform: scale(1.1);
+      }
     }
   }
 
-  img {
+  .image {
     display: block;
     width: 100%;
     height: auto;
@@ -53,6 +54,8 @@
 
   .user-name {
     color: #ffffff;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
+    transform-origin: left top;
+    transition: transform 300ms ease-in-out;
   }
 </style>
