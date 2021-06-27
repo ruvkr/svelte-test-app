@@ -6,8 +6,19 @@
   import { images } from './images';
 
   let selectedImageData: ImageData | null = null;
-  let selectedImageDom: HTMLElement | null = null;
+  // let flipTargetLayoutId: string | undefined = undefined;
   let ratio: number = 1;
+
+  const clickHander = (imageData: ImageData | null) => {
+    if (imageData) {
+      selectedImageData = imageData;
+      // flipTargetLayoutId = `gallery-card-${imageData.id}`;
+      ratio = imageData.size.width / imageData.size.height;
+    } else {
+      selectedImageData = null;
+      ratio = 1;
+    }
+  };
 </script>
 
 <main>
@@ -16,27 +27,21 @@
       <Column>
         {#each column as image (image.id)}
           <GalleryCard
+            layoutId={`gallery-card-${image.id}`}
             thumb={image.thumb}
             user_name={image.user_name}
-            onClick={dom => {
-              selectedImageData = image;
-              selectedImageDom = dom;
-              ratio = image.size.width / image.size.height;
-            }}
+            on:click={() => clickHander(image)}
           />
         {/each}
       </Column>
     {/each}
   </Container>
+
   <Modal
     {ratio}
+    flipTargetLayoutId={selectedImageData ? `gallery-card-${selectedImageData.id}` : undefined}
     show={selectedImageData != null}
-    originElement={selectedImageDom}
-    close={() => {
-      selectedImageData = null;
-      // selectedImageDom = null;
-      ratio = 1;
-    }}
+    close={() => clickHander(null)}
   >
     <img src={selectedImageData.thumb} alt="Photo by {selectedImageData.user_name}" />
   </Modal>

@@ -1,11 +1,10 @@
 <script lang="ts">
   export let thumb: string;
   export let user_name: string;
-  export let onClick: ((dom: HTMLDivElement) => void) | undefined = undefined;
-  let dom: HTMLDivElement;
+  export let layoutId: string | undefined = undefined;
 </script>
 
-<div class="container" title="Photo by {user_name}" bind:this={dom} on:click={() => onClick && onClick(dom)}>
+<div data-layoutid={layoutId} class="container" title="Photo by {user_name}" on:click>
   <img class="image" src={thumb} alt="Photo by {user_name}" />
   <div class="info">
     <div class="credit">Photo by</div>
